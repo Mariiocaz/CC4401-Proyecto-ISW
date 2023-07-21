@@ -1,0 +1,158 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1, h2 {
+  margin-top: 10px;
+}
+
+/* Estilos de encabezado */
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+/* Estilos de formulario */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.form-group {
+  flex-basis: 100%;
+  margin: 0 10px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"] {
+  display: block;
+  width: 95%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button, input[type="submit"]{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: #555;
+}
+
+/* Estilos de tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.centered {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+/* Estilos de mensaje de error */
+.error-msg {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Estilo para el elemento select */
+select.form-group {
+  color: #777676; /* Color del texto */
+  margin: 0 -10px;
+  width: 100%; /* Ancho del select */
+  padding: 10px 20px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilo para las opciones dentro del select */
+select.form-group option {
+  color: #030000;
+  padding: 8px; /* Espaciado interno */
+}
+
+/* Estilo para la opción por defecto */
+select.form-group option.disabled {
+  color: #999; /* Color del texto */
+}
+
+/* Estilo para las opciones al hacer hover */
+select.form-group option:hover {
+  background-color: #f5f5f5; /* Color de fondo al hacer hover */
+}
+
+/* The Modal (background) */
+.modal-x {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content-x {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.x {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.x:hover,
+.x:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} 
+

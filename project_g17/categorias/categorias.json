@@ -1,0 +1,37 @@
+[
+    {
+        "model": "categorias.categoria",
+        "pk": 1,
+        "fields": {
+            "nombre": "Compras"
+        }
+    },
+    {
+        "model": "categorias.categoria",
+        "pk": 2,
+        "fields": {
+            "nombre": "Trabajo"
+        }
+    },
+    {
+        "model": "categorias.categoria",
+        "pk": 3,
+        "fields": {
+            "nombre": "Transporte"
+        }
+    },
+    {
+        "model": "categorias.categoria",
+        "pk": 4,
+        "fields": {
+            "nombre": "Ventas"
+        }
+    },
+    {
+        "model": "categorias.categoria",
+        "pk": 5,
+        "fields": {
+            "nombre": "Otros"
+        }
+    }
+    ]

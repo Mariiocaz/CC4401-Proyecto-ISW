@@ -1,0 +1,223 @@
+{% extends 'app_project/base.html' %}
+{% load static %}
+
+{% block title %}Cuenta de {{ request.user.get_username }}{% endblock %}
+<!-- La idea es variar el titulo de la cuenta en función del user que hizo login, user_login deberia ser una variable python-->
+
+{% block css %}
+<!-- DataTable.js -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.3.3/css/rowReorder.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css" />
+<!-- Se usa el DTL (Django Template Language), similar a jinja2, para acceder a la variable, que es lo que esta entre llaves, user_login es un nombre tentativo -->
+<link rel="stylesheet" type="text/css" href="{% static 'app_project/user-account.css' %}">
+<!-- Una vez definidas las url, es mejor usar el dispatch de urls -->
+{% endblock %}
+
+{% block content %}
+<header>
+  <div class="logo"><img src="{% static 'app_project/images/logo.svg' %}" alt="logo-img" class="logo-img"></div>
+  <button class="account_logout" onclick="location.href='{% url 'logout' %}'" type="button">Salir de la cuenta</button>
+</header>
+
+<main>
+  <div class="container" id="container-1">
+    <h1>Bienvenido, {{ request.user.username }}</h1>
+
+    <div class="balance" id="balance-1">
+      <h2 id="saldo" data-saldo="{{ request.user.saldo }}">Saldo: ${{ request.user.saldo }}</h2>
+    </div>
+
+    <div class="container mt-4">
+      <h2>Tus transacciones</h2>
+      <p>En esta tabla puedes ver todas las transacciones que has realizado.</p>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="table-responsive">
+            <table id="datatable-transacciones" class="display nowrap" style="width:100%">
+              <caption>
+                Transacciones
+              </caption>
+              <thead>
+                <tr>
+                  <!-- por alguna razon no puedo formatearlo con th, Fix temporal con td -->
+                  <td class="centered">#</td>
+                  <td class="centered">Nombre</td>
+                  <td class="centered">Monto</td>
+                  <td class="centered">Fecha</td>
+                  <td class="centered">Categoría</td>
+                  <td class="centered"></td>
+                </tr>
+              </thead>
+              <!-- los botones dentro de la table estan definidos en el javascript -->
+              <tbody id="tableBody_transacciones"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form method="post" id="output-form-3">
+      {% csrf_token %} <!-- csrf token for basic security -->
+      <!-- The Modal -->
+      <div id="myModal" class="modal-x">
+
+        <!-- Modal content -->
+        <div class="modal-content-x">
+          <span class="x">&times;</span>
+
+          <div id="modal-input"></div>
+
+          <div class="row" id="row-2">
+            <input type="submit" class="send-btn" name="taskMod" value="Modificar transacción" id="task-mod">
+          </div>
+
+        </div>
+
+      </div>
+    </form>
+
+    <div>
+      {% csrf_token %} <!-- csrf token for basic security -->
+      <!-- The Modal -->
+      <div id="myDeleteModal" class="modal-x">
+
+        <!-- Modal content -->
+        <div id="delete" class="modal-content-x">
+          <span class="x">&times;</span>
+          <div id="modal-delete"></div>
+
+        </div>
+      </div>
+    </div>
+
+    <p class="error-msg" id="error-modificacion"></p>
+
+    <div class="form-container">
+      <div class="form-group">
+        <h2>Filtrar transacciones</h2>
+        <p>Si deseas filtrar una lista específica de transacciones puedes hacerlo con los siguientes atributos:</p>
+        <p>- Si deseas filtrar tus transacciones por fecha, debes seleccionar una fecha de inicio y una de fin.</p>
+        <p>- Si deseas filtrar tus transacciones por categoría, selecciona la categoría que desees filtrar.</p>
+        <p>- También puedes filtrar usando ambos atributos a la vez.</p>
+        <div class="form-group date-filters">
+          <div class="form-group">
+            <h2>Fecha de inicio:</h2>
+            <input name="fecha-inicio" id="fecha-inicio" type="date">
+          </div>
+          <div class="form-group">
+            <h2>Fecha de término:</h2>
+            <input name="fecha-termino" id="fecha-termino" type="date">
+          </div>
+        </div>
+        <div class="form-group">
+          <h2>Filtrar por categoría:</h2>
+          <select name="categoria-filtro" class="form-group" id="categoria-filtro">
+            <option class="disabled" value="">Elige una categoría</option>
+            {% for categoria in categorias %}
+            <option value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button id="reset-filters-btn">Restablecer filtros</button>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <form method="post" id="output-form-2">
+        {% csrf_token %} <!-- csrf token for basic security -->
+
+        <div class="form-group">
+          <h2>Agregar transacción</h2>
+          <label for="nameAdd">Nombre de tu transacción</label>
+          <input type="text" class="form-control" placeholder="Ingresa un nombre" name="nameAdd" >
+        </div>
+
+        <div class="form-group">
+          <label for="amountAdd">Monto</label>
+          <input type="text" class="form-control" placeholder="Ingresa un monto" name="amountAdd">
+        </div>
+
+        <div class="form-group">
+          <label for="dateAdd">Fecha</label>
+          <input type="date" class="form-control" name="dateAdd">
+        </div>
+
+        <div class="form-group">
+          <label for="classAdd">Categoría</label>
+          <select name="classAdd" class="form-group" id="nombre">
+            <option class="disabled" value="">Elige una categoría</option>
+            {% for categoria in categorias %}
+            <option value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <p class="error-msg" id="error-transaccion">{{error_transaccion}}</p>
+
+        <div class="container-centered">
+          <div class="row" id="row-1">
+            <input type="submit" class="send-btn" name="taskAdd" value="Agregar transacción">
+          </div>
+        </div>
+      </form>
+    
+
+
+      <form method="post" id="output-form">
+        {% csrf_token %} <!-- csrf token for basic security -->
+
+        <div class="form-group">
+          <h2>Agregar categoría</h2>
+          <label for="categoryAdd">Nombre de tu nueva categoría</label>
+          <input type="text" class="form-control" placeholder="Ingresa un nombre" name="categoryAdd" size="50">
+          <p class="error-msg" id="error-categoria"> {{error_categoria}}</p>
+        </div>
+
+        <div class="row" id="row-0">
+          <input type="submit" class="send-btn" name="taskCategory" value="Agregar categoría">
+        </div>
+      </form>
+
+
+
+      <form method="post" id="output-form-1">
+        {% csrf_token %} <!-- csrf token for basic security -->
+
+        <div class="form-group">
+          <h2>Eliminar categoría</h2>
+          <div class="form-group">
+            <label for="categoryDel">Selecciona la categoría a eliminar</label>
+            <select name="categoryDel" class="form-group" id="nombre">
+              <option class="disabled" value="">Elige una categoría</option>
+              {% for categoria in categorias %}
+              <option value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <p id="error-msg">{{error_eliminar_categoria}}</p>
+
+        <div class="row" id="row-01">
+          <input type="submit" class="send-btn" name="taskDelCategory" value="Eliminar categoría">
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+</main>
+{% endblock %}
+
+{% block js %}
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- DataTable.js -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.3.3/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+<script src="{% static 'app_project\userAccount.js' %}"></script>
+{% endblock %}

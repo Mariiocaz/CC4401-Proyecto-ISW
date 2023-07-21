@@ -1,0 +1,120 @@
+{% extends 'app_project/base.html' %}
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block meta %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% endblock %}
+
+  {% block favicon %}
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  {% endblock %}
+
+  {% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'app_project/style.css' %}">
+  {% endblock %}
+
+  {% block title %}Mispagos{% endblock %}
+  
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+{% block content %}
+<body>
+  <header>
+    <div class="logo">
+      <img src="{% static 'app_project/images/logo.svg' %}" alt="logo-img" class="logo-img">
+    </div>
+
+    <ul class="navigation">
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Acerca de nosotros</a></li>
+      <li><a href="#">Contacto</a></li>
+      <li><a href="#"></a></li>
+    </ul>
+
+    <button class="account_login" onclick="location.href='/login'" type="button">Mi cuenta</button>
+
+    <button class="dropdown-toggle"><img src="{% static 'app_project/images/icon-hamburger.svg' %} alt="icon-hamburger"></button>
+  </header>
+  
+  <main>
+    <section class="details">
+      <div class="brief_details">
+        <h1>Administra tus pagos de forma sencilla</h1>
+        <p>Te ayudamos a manejar tus finanzas de la manera más efectiva en cualquier dispositivo.</p>
+        <button class="account_login" onclick="location.href='/login'" type="button">Mi cuenta</button>
+      </div>
+
+      <div class="mockup">
+        <img src="{% static 'app_project/images/image-mockups.png' %}" alt="" class="mockup-img">
+      </div>
+    </section>
+
+    <section class="reason">
+      <div class="benefit">
+        <h1>¿Por qué escogernos?</h1>
+        <p>En un mundo cada vez más digital, Mispagos se encuentra a la vanguardia de la innovación tecnológica en el sector bancario. Nuestro banco ofrece una plataforma en línea y una aplicación móvil intuitiva que permiten a nuestros clientes acceder a sus cuentas, realizar transacciones y gestionar sus finanzas de manera segura y conveniente desde cualquier lugar y en cualquier momento.</p>
+      </div>
+
+      <div class="why_list">
+        <div class="online-banking">
+            <img src="{% static 'app_project/images/icon-online.svg' %}" alt="icon-online">
+            <h2>Distintas categorías</h2>
+            <p>Amplia gama de productos y servicios, su enfoque en la tecnología, su atención al cliente personalizada, su seguridad y confidencialidad</p>
+        </div>
+        
+        <div class="simple-budgeting">
+            <img src="{% static 'app_project/images/icon-budgeting.svg' %}" alt="icon-budgeting">
+            <h2>Presupuesto simple</h2>
+            <p>En Mispagos, entendemos que cada cliente tiene necesidades financieras únicas. Por eso, ofrecemos una amplia gama de productos y servicios diseñados para satisfacer las demandas tanto de particulares como de empresas</p>
+        </div>
+
+        <div class="fast-onboarding">
+            <img src="{% static 'app_project/images/icon-onboarding.svg' %}" alt="icon-onboarding">
+            <h2>Múltiples clientes</h2>
+            <p>En Mispagos, creemos en el poder de hacer una diferencia en la comunidad en la que operamos. Estamos comprometidos con el desarrollo social y económico, y apoyamos diversas iniciativas y proyectos que promueven el bienestar de la sociedad</p>
+        </div>
+
+        <div class="open-api">
+            <img src="{% static 'app_project/images/icon-api.svg' %}" alt="icon-api">
+            <h2>Velocidad</h2>
+            <p>Mispagos cuenta con una sólida experiencia en el sector bancario, respaldado por décadas de éxito y una trayectoria impecable. Nuestro compromiso con la excelencia y la atención al cliente nos ha permitido construir una reputación sólida y confiable en el mercado</p>
+        </div>
+
+      </div>
+    </section>
+  </main>  
+
+  <footer>
+      <div class="ft-one">
+        <div class="social_link">
+          <img src="{% static 'app_project/images/logo-blank.svg' %}" alt="logo-img" class="logo-img">
+        </div>
+
+        <ul class="ft-nav-1">
+          <li> <a href="#about-us">Acerca de nosotros</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+
+        <ul class="ft-nav-2">
+          <li><a href="#support">Soporte</a></li>
+          <li><a href="#privacy-policy">Política de privacidad</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-two">
+        <button class="account_login" onclick="location.href='/login'" type="button">Mi cuenta</button>
+      </div>
+  </footer>
+</body>
+{% endblock %}
+</html>
+

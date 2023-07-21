@@ -1,0 +1,40 @@
+{% extends 'app_project/base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'app_project/login.css' %}">
+  <!-- Una vez definidas las url, es mejor usar el dispatch de urls -->
+{% endblock %}
+
+{% block content %}
+  <div class="container" id="container-1">
+    <form method="post"> <!-- Esta parte corresponde a post -->
+      {% csrf_token %}
+
+      <div class="center">
+        <h2>Login</h2>
+        <form method="post">
+          <div class="txt_field">
+            <input type="text" class="form-control" id="nombre" name="username" size="50">
+            <span></span>
+            <label for="nombre_usuario">Nombre de Usuario</label>
+          </div>
+          <div class="txt_field">
+            <input type="password" class="form-control" id="contrasenna" name="contrasenna" size="50">
+            <span></span>
+            <label for="contrasenna">Contraseña</label>
+          </div>
+          <div class="pass">¿Olvidaste tu contraseña?</div>
+          {% if error %}
+          <p class="error-msg">{{ error|linebreaksbr }}</p>
+          {% endif %}
+          <input type="submit" value="Ingresar">
+          <div class="signup_link">¿No tienes cuenta? <a href="{% url 'register_user' %} ">Regístrate</a></div>
+        </form>
+      </div>
+
+    </form>
+{% endblock %}
+

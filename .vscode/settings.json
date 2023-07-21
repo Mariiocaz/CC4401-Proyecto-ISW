@@ -1,0 +1,102 @@
+{
+  "latex-workshop.intellisense.package.enabled": true,
+  "latex-workshop.message.warning.show": false,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.linting.chktex.exec.args": [],
+  "latex-workshop.message.badbox.show": false,
+  "latex-workshop.message.latexlog.exclude": [
+    "Size substitutions with differences",
+    "Font shape",
+    "I found no",
+  ],
+  "latex-workshop.latex.autoBuild.run": "never",
+  "latex-workshop.latex.clean.subfolder.enabled": true,
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.recipe.default": "lastUsed",
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-f",
+        "-file-line-error",
+        "-pdf",
+        "-output-directory=build",
+        "%DOC%"
+      ],
+      "env": {},
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-f",
+        "-file-line-error",
+        "-output-directory=build",
+        "%DOC%"
+      ],
+      "env": {},
+    },
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-shell-escape",
+        "-output-directory=build",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "env": {},
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": ["build/%DOCFILE%"],
+      "env": {},
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {"name": "pdflatex", "tools": ["pdflatex"]},
+    {
+      "name": "pdflatex pdflatex",
+      "tools": ["pdflatex", "pdflatex"]
+    },
+    {
+      "name": "pdflatex + bibtex",
+      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    }
+  ],
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.latex.clean.method": "glob",
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.pygtex",
+    "*.pygstyle",
+    "*.fdb_latexmk"    
+  ]
+}

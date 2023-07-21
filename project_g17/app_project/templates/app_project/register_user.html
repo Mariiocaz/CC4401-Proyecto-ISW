@@ -1,0 +1,36 @@
+{% extends 'app_project/base.html' %}
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'app_project/login.css' %}">{% endblock %}
+
+{% block content %}
+  <div class="container" id="container-1">
+    <form method="post">
+      {% csrf_token %}
+      <div class="center">
+        <h2>Registro</h2>
+        <div class="txt_field">
+          <input type="text" class="form-control" id="nombre_usuario" name="nombre" size="50">
+          <span></span>
+          <label for="nombre_usuario">Nombre de Usuario</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" class="form-control" id="contrasenna" name="contrasenna" size="50">
+          <span></span>
+          <label for="contrasenna">Contraseña</label>
+        </div>
+        <div class="pass">¿Olvidaste tu contraseña?</div>
+        {% if error %}
+        <p class="error-msg">{{ error|linebreaksbr }}</p>
+        {% endif %}
+        <input type="submit" value="Crear Usuario">
+        <div class="signup_link">¿Tienes cuenta? <a href="{% url 'login' %}">Ingresa</a></div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+
+{% block js %}{% endblock %}
+
+
